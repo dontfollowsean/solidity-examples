@@ -9,17 +9,24 @@ interface Regulator {
 
 contract Bank is Regulator {
 
-	uint private val;
+	uint private value;
+	address private owner;
 
+	modifier ownerFunction(uint _time) { 
+		require(owner == msg.sender);
+		_;
+	}
+	
 	function Bank(uint amount) {
 		value = amount;
+		owner = msg.sender;
 	}
 
-	function deposit(uint amount) {
+	function deposit(uint amount) ownerFunction {
 		value += amount;		
 	}
 
-	function withdram (uint amount) {
+	function withdram (uint amount) ownerFunction {
 		if(checkValue(amount)){
 			value -= amount;
 		}
