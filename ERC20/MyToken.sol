@@ -18,14 +18,14 @@ contract MyFirstToken is ERC20 {
         return _totalSupply = TOTAL_SUPPLY;
     }
 
-    function balcanceOf(address owner) public view returns(uint balance) {
-        return _balanceOf[owner];
+    function balcanceOf(address _owner) public view returns(uint balance) {
+        return _balanceOf[_owner];
     }
 
-    function transfer(address to, uint value) public returns (bool success) {
-        if (value > 0 && value <= balanceOf(msg.sender)) {
-            _balanceOf[msg.sender] -= value;
-            _balanceOf[to] += value;
+    function transfer(address _to, uint _value) public returns (bool success) {
+        if (_value > 0 && _value <= balanceOf(msg.sender)) {
+            _balanceOf[msg.sender] -= _value;
+            _balanceOf[_to] += _value;
             return true;
         }
         return false;
