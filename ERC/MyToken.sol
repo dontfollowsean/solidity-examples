@@ -3,7 +3,7 @@ pragma solidity ^0.4.17;
 import "./Token.sol";
 import "./ERC20.sol";
 import "./ERC223.sol";
-// import "./ERC223ReceivingContract.sol";
+import "./ERC223ReceivingContract.sol";
 
 contract MyFirstToken is Token("MFT", "My First Token", 18, 1000), ERC20, ERC223 {
 
@@ -38,7 +38,7 @@ contract MyFirstToken is Token("MFT", "My First Token", 18, 1000), ERC20, ERC223
             _balanceOf[msg.sender] -= _value;
             _balanceOf[_to] += _value;
             ERC223ReceivingContract _contract = ERC223ReceivingContract(_to);
-                _contract.tokenFallback(msg.sender, _value, _data);
+            _contract.tokenFallback(msg.sender, _value, _data);
             Transfer(msg.sender, _to, _value, _data);
             return true;
         }
